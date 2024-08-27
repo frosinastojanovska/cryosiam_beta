@@ -1,0 +1,28 @@
+data_folder: '/scratch/stojanov/mycoplasma_data/vpp/240422/'
+gt_folder: '/scratch/stojanov/mycoplasma_data/vpp/240422/'
+log_dir: '/scratch/stojanov/development/cryoet-torch/experiments/dense_simsiam_semantic'
+prediction_folder: '/scratch/stojanov/development/cryoet-torch/experiments/dense_simsiam_semantic/predictions'
+trained_model: '/scratch/stojanov/development/cryoet-torch/experiments/dense_simsiam_semantic/model/model-best.ckpt'
+file_extension: '.mrc'
+
+test_files: [ 'TS_56_6.80Apx.mrc', 'TS_61_6.80Apx.mrc' ]
+
+eval_skip_prediction: False
+
+scale_prediction: True
+
+parameters:
+  gpu_devices: 1
+  data:
+    patch_size: [ 64, 64, 64 ]
+    min: 0
+    max: 15
+    mean: 0.5789
+    std: 0.12345
+  network:
+    in_channels: 1
+    spatial_dims: 3
+    n_output_channels: 1
+
+hyper_parameters:
+  batch_size: 40
