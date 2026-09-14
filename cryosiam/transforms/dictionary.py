@@ -4,7 +4,7 @@ from monai.utils import convert_to_tensor
 from monai.data.meta_obj import get_track_meta
 from typing import Optional, Dict, Hashable, Tuple
 from monai.config.type_definitions import NdarrayOrTensor
-from monai.transforms.compose import MapTransform, RandomizableTransform
+from monai.transforms import MapTransform, RandomizableTransform
 
 from .array import (
     NumpyToTensor,
