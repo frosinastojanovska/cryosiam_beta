@@ -70,10 +70,14 @@ def instance_segmentation(foreground, distances, boundaries, threshold_min=0, th
     # costs, sizes = features[:, 0], features[:, 1]
     # # we choose a boundary bias smaller than 0.5 in order to decrease the degree of over segmentation
     # costs = mc.transform_probabilities_to_costs(costs, edge_sizes=sizes, beta=boundary_bias)
-    probs = feats.compute_boundary_features(rag, boundaries)[:, 0]
+    #----probs = feats.compute_boundary_features(rag, boundaries)[:, 0]
+    #---- python-elf api > 0.9
+    probs = feats.compute_boundary_features(rag, watershed_seg, boundaries)[:, 0]
     costs = mc.transform_probabilities_to_costs(probs, beta=boundary_bias)
     node_labels = mc.multicut_kernighan_lin(rag, costs)
-    segmentation = feats.project_node_labels_to_pixels(rag, node_labels)
+    #---- segmentation = feats.project_node_labels_to_pixels(rag, node_labels)
+    #---- python-elf api > 0.9
+    segmentation = feats.project_node_labels_to_pixels(rag, watershed_seg, node_labels)
     watershed_seg[segmentation > 0] = 0
     segmentation = join_segmentations(segmentation, watershed_seg)
     return segmentation
